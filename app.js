@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const contacts = require("./routes/contacts");
 const auth = require("./routes/auth");
 const connectDB = require("./db/connectdb");
@@ -8,6 +9,11 @@ const notFound = require("./middlewares/not-found");
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send('<h1>Agenda API</h1><a href="/api-docs">Documentation</a>');
+});
 
 app.use("/api/v1/contacts", authentication, contacts);
 app.use("/api/v1/", auth);
