@@ -1,0 +1,220 @@
+openapi: 3.0.0
+info:
+  title: Agenda API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://agenda-api-tuox.onrender.com/api/v1
+    variables: {}
+paths:
+  /contacts:
+    get:
+      tags:
+        - Contacts
+      summary: Get All Contacts
+      operationId: GetAllContacts
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Contacts
+      summary: Contact Created
+      operationId: ContactCreated
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ContactCreatedRequest"
+                - example:
+                    name: guillermo
+                    lastname: guerrero
+            example:
+              name: guillermo
+              lastname: guerrero
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /contacts/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The contact ID
+    patch:
+      tags:
+        - Contacts
+      summary: Contact Updated
+      operationId: ContactUpdated
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ContactUpdatedRequest"
+                - example:
+                    name: juan
+                    lastname: ssss
+            example:
+              name: juan
+              lastname: ssss
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Contacts
+      summary: Contact delted
+      operationId: Contactdelted
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Login user
+      operationId: Loginuser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginuserRequest"
+                - example:
+                    password: juan1988
+                    email: juan1988@hotmail.com
+            example:
+              password: juan1988
+              email: juan1988@hotmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /register:
+    post:
+      tags:
+        - Auth
+      summary: Register user
+      operationId: Registeruser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisteruserRequest"
+                - example:
+                    password: juan1988
+                    email: juan1988@hotmail.com
+            example:
+              password: juan1988
+              email: juan1988@hotmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    ContactCreatedRequest:
+      title: ContactCreatedRequest
+      required:
+        - name
+        - lastname
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+      example:
+        name: guillermo
+        lastname: guerrero
+    ContactUpdatedRequest:
+      title: ContactUpdatedRequest
+      required:
+        - name
+        - lastname
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+      example:
+        name: juan
+        lastname: ssss
+    LoginuserRequest:
+      title: LoginuserRequest
+      required:
+        - password
+        - email
+      type: object
+      properties:
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        password: juan1988
+        email: juan1988@hotmail.com
+    RegisteruserRequest:
+      title: RegisteruserRequest
+      required:
+        - password
+        - email
+      type: object
+      properties:
+        password:
+          type: string
+        email:
+          type: string
+      example:
+        password: juan1988
+        email: juan1988@hotmail.com
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Contacts
+    description: ""
+  - name: Auth
+    description: ""

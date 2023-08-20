@@ -10,10 +10,14 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 app.get("/", (req, res) => {
   res.send('<h1>Agenda API</h1><a href="/api-docs">Documentation</a>');
 });
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use("/api/v1/contacts", authentication, contacts);
 app.use("/api/v1/", auth);
